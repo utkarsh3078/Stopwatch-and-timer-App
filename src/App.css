@@ -390,6 +390,48 @@ h1 {
   color: var(--liquid-text);
 }
 
+/* Inputs for setting hours/minutes/seconds */
+.input {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  margin-bottom: 18px;
+}
+
+.input input[type="number"] {
+  width: 110px;
+  max-width: 32%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(143, 211, 249, 0.48);
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  text-align: center;
+  color: var(--liquid-text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  -moz-appearance: textfield;
+}
+
+.input input[type="number"]::-webkit-outer-spin-button,
+.input input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input input[type="number"]:focus {
+  outline: 2px solid rgba(91, 188, 233, 0.35);
+  outline-offset: 2px;
+}
+
+.input input[disabled] {
+  opacity: 0.6;
+  background: rgba(230, 245, 252, 0.8);
+  cursor: not-allowed;
+  color: rgba(14, 63, 89, 0.65);
+}
+
 .dial-time .sep {
   opacity: 0.75;
 }
@@ -571,6 +613,17 @@ button:nth-child(3) {
     gap: 10px;
     padding-inline: 12px;
     box-sizing: border-box;
+  }
+
+  .input {
+    gap: 8px;
+    padding-inline: 12px;
+    box-sizing: border-box;
+  }
+
+  .input input[type="number"] {
+    width: 100%;
+    max-width: none;
   }
 
   button {
