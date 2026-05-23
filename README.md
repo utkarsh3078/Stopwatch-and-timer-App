@@ -1,16 +1,30 @@
-# React + Vite
+# Timer and Stopwatch — Logic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Timer (countdown)
 
-Currently, two official plugins are available:
+- State
+  - `timeLeft` (ms): remaining time in milliseconds (single source of truth).
+  - `isRunning` (boolean): whether the countdown is active.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Behavior
+  - When `isRunning` becomes `true`, start one `setInterval` (tick e.g. 10ms).
+  - On each tick use a functional updater: `setTimeLeft(prev => Math.max(prev - tick, 0))`.
+  - If the result is `0`, clear the interval and set `isRunning` to `false`.
 
-## React Compiler
+- Inputs
+  - Hour/minute/second inputs parse integers and recompute `timeLeft` by composing milliseconds so editing one unit preserves others.
+  - Inputs are disabled while `isRunning` to prevent mid-count edits.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stopwatch (count up)
 
-## Expanding the ESLint configuration
+- State
+  - `elapsed` (ms): total elapsed milliseconds.
+  - `isRunning` (boolean): whether the stopwatch is running.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Behavior
+  - When `isRunning` becomes `true`, start a `setInterval` at the chosen granularity (10ms or 100ms).
+  - Increment with a functional updater: `setElapsed(prev => prev + tick)`.
+  - Stopping clears the interval; resetting sets `elapsed` to `0` and stops running.
+
+- Display
+  - Convert ms to hours/minutes/seconds/centiseconds via integer division and modulo for padded numeric segments.
