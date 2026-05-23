@@ -196,12 +196,23 @@
   --liquid-btn-hover: #3aa7d7;
 }
 
+/* Prevent page scrolling; keep stopwatch centered in viewport */
+html,
+body {
+  height: 100svh;
+  overflow: hidden;
+}
+
 body {
   min-height: 100svh;
   position: relative;
   overflow-x: hidden;
   background-size: 150% 150%;
   animation: liquidFlow 18s ease-in-out infinite alternate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 18px;
   background:
     radial-gradient(
       circle at 15% 20%,
@@ -258,9 +269,11 @@ body::after {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  width: min(920px, calc(100% - 28px));
-  margin: 28px auto;
-  padding: 42px 26px;
+  width: min(680px, 92vw);
+  margin: auto;
+  padding: 16px 22px;
+  max-height: calc(100svh - 140px);
+  margin-bottom: 18px;
   border: 1px solid var(--liquid-border);
   border-radius: 48px;
   background: linear-gradient(
@@ -505,9 +518,11 @@ button:nth-child(3) {
 
 @media (max-width: 700px) {
   #root {
-    margin: 12px auto;
-    padding: 24px 12px;
+    margin: 8px auto 12px;
+    padding: 12px 10px;
     border-radius: 34px;
+    width: min(520px, 96vw);
+    max-height: calc(100svh - 88px);
   }
 
   .dial {
